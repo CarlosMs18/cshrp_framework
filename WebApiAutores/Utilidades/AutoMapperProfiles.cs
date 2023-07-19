@@ -13,7 +13,8 @@ namespace WebApiAutores.Utilidades
             CreateMap<Autor, AutorDTO>();
             CreateMap<LibroCreacionDTO, Libro>();
             CreateMap<Libro, LibroDTO>();
-            CreateMap<ComentarioControllerDto, Comentario>();
+            CreateMap<ComentarioCreacionDto, Comentario>();
+            CreateMap<Comentario, ComentarioDTO>(); 
         }
     }
 }

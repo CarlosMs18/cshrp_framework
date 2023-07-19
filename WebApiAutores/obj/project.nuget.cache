@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NCG58RqVZplgAEq8YVg3IGinJs7gEz/rjB9sEBvo/DV9pekg2AzMiZnz1/CyY7ZT8IYRqB9xFWR7jxD73wfQFg==",
+  "dgSpecHash": "r+aCZjl3dFuOrB9AuMwsVDQFpfxt98xZKgtxN8EhVgqGkLxZzyozk8LofylwC9fsYMkMRCXOO8YnwDNnwz9t+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jazmi\\source\\repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj",
+  "projectFilePath": "C:\\Users\\jazmi\\Source\\Repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jazmi\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\jazmi\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

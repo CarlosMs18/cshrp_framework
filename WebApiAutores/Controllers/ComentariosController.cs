@@ -9,7 +9,7 @@ namespace WebApiAutores.Controllers
 {
     [ApiController]
     [Route("api/libros/{libroId:int}/comentarios")]
-    public class ComentariosController
+    public class ComentariosController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
@@ -22,6 +22,22 @@ namespace WebApiAutores.Controllers
             this.context = context;
             this.mapper = mapper;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ComentarioDTO>>> Get(int libroId)
+        {
+
+            var existeLibro = await context.Libros.AnyAsync(libroDB => libroDB.Id == libroId);
+            if (!existeLibro)
+            {
+                return NotFound();
+            }
+            var comentarios = await context.Comentarios
+                .Where(comentarioDB => comentarioDB.LibroId == libroId).ToListAsync();
+
+            return mapper.Map<List<ComentarioDTO>>(comentarios);
+        }
+
         [HttpPost]
         public async Task<ActionResult>  Post(int libroId, ComentarioCreacionDto comentarioCreacionDto)
         {

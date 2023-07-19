@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jazmi\\source\\repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj": {}
+    "C:\\Users\\jazmi\\Source\\Repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jazmi\\source\\repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj": {
+    "C:\\Users\\jazmi\\Source\\Repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jazmi\\source\\repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj",
+        "projectUniqueName": "C:\\Users\\jazmi\\Source\\Repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj",
         "projectName": "WebApiAutores",
-        "projectPath": "C:\\Users\\jazmi\\source\\repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj",
+        "projectPath": "C:\\Users\\jazmi\\Source\\Repos\\cshrp_framework\\WebApiAutores\\WebApiAutores.csproj",
         "packagesPath": "C:\\Users\\jazmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jazmi\\source\\repos\\cshrp_framework\\WebApiAutores\\obj\\",
+        "outputPath": "C:\\Users\\jazmi\\Source\\Repos\\cshrp_framework\\WebApiAutores\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jazmi\\AppData\\Roaming\\NuGet\\NuGet.Config",
