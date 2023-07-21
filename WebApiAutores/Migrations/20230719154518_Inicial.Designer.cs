@@ -12,8 +12,8 @@ using WebApiAutores;
 namespace WebApiAutores.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230719025136_inicial")]
-    partial class inicial
+    [Migration("20230719154518_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,27 @@ namespace WebApiAutores.Migrations
                     b.ToTable("Autores");
                 });
 
+            modelBuilder.Entity("WebApiAutores.Entidades.Comentario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Contenido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LibroId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LibroId");
+
+                    b.ToTable("Comentarios");
+                });
+
             modelBuilder.Entity("WebApiAutores.Entidades.Libro", b =>
                 {
                     b.Property<int>("Id")
@@ -55,6 +76,7 @@ namespace WebApiAutores.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Titulo")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -63,6 +85,17 @@ namespace WebApiAutores.Migrations
                     b.HasIndex("AutorId");
 
                     b.ToTable("Libros");
+                });
+
+            modelBuilder.Entity("WebApiAutores.Entidades.Comentario", b =>
+                {
+                    b.HasOne("WebApiAutores.Entidades.Libro", "Libro")
+                        .WithMany()
+                        .HasForeignKey("LibroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Libro");
                 });
 
             modelBuilder.Entity("WebApiAutores.Entidades.Libro", b =>

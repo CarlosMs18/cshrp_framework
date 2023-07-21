@@ -23,11 +23,11 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Autor>>>  Get()
+        public async Task<ActionResult<List<AutorDTO>>>  Get()
         {
             //return await context.Autores.Include(x => x.Libros).ToListAsync();
             var autores = await context.Autores.ToListAsync();
-            return mapper.Map<List<Autor>>(autores);   
+            return mapper.Map<List<AutorDTO>>(autores);   
         }
 
 
@@ -38,18 +38,39 @@ namespace WebApiAutores.Controllers
             return mapper.Map<List<AutorDTO>>(autores);    
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<AutorDTO>> Get(int id)
+        //DESPUES DE USAR EHRENCIA
+
+        [HttpGet("{id:int}", Name = "obtenerPorAutor")]
+        public async Task<ActionResult<AutorDTOConLibros>> Get(int id)
         {
-            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Id == id); 
-            if(autor == null)
+            var autor = await context.Autores
+                .Include(autorDB => autorDB.AutoresLibros)
+                .ThenInclude(autorLibroDB => autorLibroDB.Libro)
+                .FirstOrDefaultAsync(autorDB => autorDB.Id == id);
+            if (autor == null)
             {
                 return NotFound();
             }
-            return mapper.Map<AutorDTO>(autor);
+            return mapper.Map<AutorDTOConLibros>(autor);
 
-            
+
         }
+        //antes de herencia
+        //[HttpGet("{id:int}")]
+        //public async Task<ActionResult<AutorDTO>> Get(int id)
+        //{
+        //    var autor = await context.Autores
+        //        .Include(autorDB => autorDB.AutoresLibros)
+        //        .ThenInclude(autorLibroDB => autorLibroDB.Libro)
+        //        .FirstOrDefaultAsync(autorDB => autorDB.Id == id); 
+        //    if(autor == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return mapper.Map<AutorDTO>(autor);
+
+
+        //}
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] AutorCreacionDTO autorCreacionDTO)
@@ -64,25 +85,31 @@ namespace WebApiAutores.Controllers
 
             context.Add(autor);
             await context.SaveChangesAsync();
-            return Ok();
+            //return Ok();
+
+            var autorDTO = mapper.Map<AutorDTO>(autor);
+            return CreatedAtRoute("obtenerPorAutor", new {id = autor.Id}, autorDTO);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Put(Autor autor, int id)
+        public async Task<IActionResult> Put(AutorCreacionDTO autorCreacionDTO, int id)
         {
             var existe = await context.Autores.AnyAsync(x => x.Id == id);
             if (!existe)
             {
                 return NotFound();
             }
-            if (autor.Id != id)
-            {
-                return BadRequest("El id del autor no coincide con el id de la URL");
-            }
+            //if (autor.Id != id)
+            //{
+            //    return BadRequest("El id del autor no coincide con el id de la URL");
+            //}
+            var autor = mapper.Map<Autor>(autorCreacionDTO);
+            autor.Id = id;
 
             context.Update(autor);
             await context.SaveChangesAsync();
-            return Ok();
+            //return Ok();
+            return NoContent();
         }
 
         [HttpDelete("{id:int}")]

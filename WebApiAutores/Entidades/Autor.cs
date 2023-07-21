@@ -21,8 +21,13 @@ namespace WebApiAutores.Entidades
 
         public List<Libro> Libros { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) //validacione s anivel de modelo, para que se ejcute se tiene 
+        public List<AutorLibro> AutoresLibros { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)//validacione s anivel de modelo, para que se ejcute se tiene 
                                                                                     //que ´pasar primero las validaciones por attrivbute
+
+       
+
         {
             if(!string.IsNullOrEmpty(Nombre)) {
                 var primeraLetra = Nombre[0].ToString();
